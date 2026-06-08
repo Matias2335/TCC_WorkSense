@@ -1,0 +1,1346 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -2368,
+        -592
+      ],
+      "id": "76a60805-c4ea-4bf5-85a7-906eac748e07",
+      "name": "Telegram Trigger",
+      "webhookId": "3e6bbb5a-9ed5-44c7-90ef-d952bf5e40f4",
+      "credentials": {
+        "telegramApi": {
+          "id": "OmxEBwNk7Ffv0Vmc",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=={{ $('Telegram Trigger').item.json.message.text }}",
+        "options": {
+          "systemMessage": "Você é um assistente corporativo inteligente integrado ao Telegram, PostgreSQL, Trello e Ollama.\n\nVocê ajuda funcionários e gestores.\n\nFunções:\n\n* responder dúvidas técnicas\n* ajudar programação\n* resolver bugs\n* criar tarefas\n* organizar produtividade\n* responder perguntas gerais\n* auxiliar desenvolvimento\n\nVocê deve responder:\n\n* de forma curta\n* objetiva\n* profissional\n\nSe o usuário pedir:\n\n* criação de tarefa → usar Trello\n* mover tarefa → usar Trello\n* listar tarefas → consultar Trello\n* dúvidas técnicas → responder resumidamente\n\nVocê deve identificar automaticamente a intenção do usuário.\n\nSempre responder em português brasileiro.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -1712,
+        -592
+      ],
+      "id": "896eabc8-63f5-4999-83af-540008beabaa",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "qwen2.5:3b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -1712,
+        -448
+      ],
+      "id": "25873259-3520-4dd3-a7a2-850dd003c6ae",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "eCRWVkA3uLTraETu",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT\n  EXISTS(\n    SELECT 1\n    FROM telegram_users\n    WHERE telegram_id = '{{ $(\"Telegram Trigger\").item.json.message.from.id }}'\n  ) AS user_exists,\n\n  (\n    SELECT trello_member_id\n    FROM telegram_users\n    WHERE telegram_id = '{{ $(\"Telegram Trigger\").item.json.message.from.id }}'\n    LIMIT 1\n  ) AS trello_member_id,\n\n  (\n    SELECT trello_name\n    FROM telegram_users\n    WHERE telegram_id = '{{ $(\"Telegram Trigger\").item.json.message.from.id }}'\n    LIMIT 1\n  ) AS trello_name;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -2224,
+        -592
+      ],
+      "id": "1f7a0a17-e363-47cb-90e3-9b0137b8a421",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "azeM6ISTCojJ7Jsd",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1440,
+        -592
+      ],
+      "id": "d59c4c70-70c0-43ac-99af-ba8f85bb4df2",
+      "name": "Send a text message",
+      "webhookId": "f964a2b9-2e77-4b4a-afcb-2edb8b73d469",
+      "credentials": {
+        "telegramApi": {
+          "id": "OmxEBwNk7Ffv0Vmc",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "=={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "tableName": "chat_memory",
+        "contextWindowLength": 6
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -1600,
+        -448
+      ],
+      "id": "abfdcfa1-7255-42e1-b8bf-0cdd230e7a67",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "azeM6ISTCojJ7Jsd",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "55c8fdb3-8a94-478c-95fd-4ce1374a136b",
+              "leftValue": "={{ $json.user_exists }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -2112,
+        -592
+      ],
+      "id": "acbf5496-d99d-4fac-be76-7800ca9c83b5",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "=Olá! Antes de começar, qual é seu nome no Trello?",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1584,
+        -144
+      ],
+      "id": "3d2c062e-bd88-4876-8408-c7de3d0aa33b",
+      "name": "Send a text message1",
+      "webhookId": "f964a2b9-2e77-4b4a-afcb-2edb8b73d469",
+      "credentials": {
+        "telegramApi": {
+          "id": "OmxEBwNk7Ffv0Vmc",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.trello.com/1/lists/6a0f354c8aa8ca0c6f20d035/cards",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "trelloApi",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -1472,
+        -1152
+      ],
+      "id": "84dbed2d-bba1-494c-9515-c295d1791721",
+      "name": "HTTP Request",
+      "credentials": {
+        "trelloApi": {
+          "id": "18GZwq7JaoanBBJW",
+          "name": "Trello account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "17003a4c-7ab5-4746-8cfc-6a3015c400bc",
+              "leftValue": "={{ $json.trello_name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1424,
+        -288
+      ],
+      "id": "c779c787-b697-4027-a987-68156d21ea8a",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE telegram_users\nSET \n  telegram_id = '{{ $(\"Telegram Trigger\").item.json.message.from.id }}',\n  telegram_name = '{{ $(\"Telegram Trigger\").item.json.message.from.first_name }}'\nWHERE LOWER(trello_name) = LOWER('{{ $(\"Telegram Trigger\").item.json.message.text.trim() }}')\n  AND telegram_id IS NULL\nRETURNING *;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -1584,
+        -320
+      ],
+      "id": "addd8cd1-6977-467c-8df7-b1b68293f371",
+      "name": "Execute a SQL query1",
+      "credentials": {
+        "postgres": {
+          "id": "azeM6ISTCojJ7Jsd",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "=❌ Não encontrei esse usuário do Trello. Confira o nome e envie novamente.",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1184,
+        -192
+      ],
+      "id": "eb3d7a24-71a7-45ca-8c1e-3d3f6a66d038",
+      "name": "Send a text message4",
+      "webhookId": "f964a2b9-2e77-4b4a-afcb-2edb8b73d469",
+      "credentials": {
+        "telegramApi": {
+          "id": "OmxEBwNk7Ffv0Vmc",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "55c8fdb3-8a94-478c-95fd-4ce1374a136b",
+              "leftValue": "={{ $('Telegram Trigger').item.json.message.text.trim().toLowerCase() }}",
+              "rightValue": "^(joao151|maria452|spiify|tainacunhabueno|caioarnoni1)$",
+              "operator": {
+                "type": "string",
+                "operation": "regex"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1824,
+        -304
+      ],
+      "id": "5cb14ea4-caa3-495f-b70a-f17541e33ee3",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "=✅ Cadastro vinculado com sucesso! Agora envie sua pergunta ou comando novamente.",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1184,
+        -336
+      ],
+      "id": "13839348-461f-4ad1-8e71-a343633cbff6",
+      "name": "Send a text message5",
+      "webhookId": "f964a2b9-2e77-4b4a-afcb-2edb8b73d469",
+      "credentials": {
+        "telegramApi": {
+          "id": "OmxEBwNk7Ffv0Vmc",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.action }}",
+                    "rightValue": "listar_tarefas",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "8a6f9051-bd2c-49fa-a6db-81211669fd58"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "listar_tarefas"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "6de510c5-d6a7-433e-820a-28430ac6714a",
+                    "leftValue": "={{ $json.action }}",
+                    "rightValue": "criar_passos",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "criar_passos"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "a63ebea6-3c48-47b1-92f4-2a342142e5bd",
+                    "leftValue": "={{ $json.action }}",
+                    "rightValue": "mover_card",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "mover_card"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d0a4b7f7-1bdb-4914-b071-967efb74df5b",
+                    "leftValue": "={{ $json.action }}",
+                    "rightValue": "listar_execucao",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "listar_execucao"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "45891e3b-1721-4f65-bd26-ad7078412078",
+                    "leftValue": "={{ $json.action }}",
+                    "rightValue": "ai",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "ai"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -1696,
+        -912
+      ],
+      "id": "7722f66f-dd79-4dec-83a2-b99314e2a650",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "jsCode": "const user = $items(\"Code in JavaScript3\")[0].json;\n\nconst trelloMemberId = user.trello_member_id;\nconst trelloName = user.trello_name;\n\nif (!trelloMemberId) {\n  return [{\n    json: {\n      text: \"❌ Não encontrei seu ID de membro do Trello no cadastro. Verifique o banco de dados.\"\n    }\n  }];\n}\n\nconst cards = items\n  .map(item => item.json)\n  .filter(card => {\n    return Array.isArray(card.idMembers) && card.idMembers.includes(trelloMemberId);\n  });\n\nif (cards.length === 0) {\n  return [{\n    json: {\n      text: `Você não possui tarefas atribuídas na lista TAREFAS no momento.`\n    }\n  }];\n}\n\nconst texto = cards.map((card, index) => {\n  const prazo = card.due\n    ? new Date(card.due).toLocaleDateString(\"pt-BR\")\n    : \"sem prazo\";\n\n  return `${index + 1}. ${card.name}\\nPrazo: ${prazo}`;\n}).join(\"\\n\\n\");\n\nreturn [{\n  json: {\n    text: `📋 Tarefas atribuídas a ${trelloName}:\\n\\n${texto}`\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1264,
+        -1152
+      ],
+      "id": "3279279a-67d4-4f43-b9f7-7b0763bb037e",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "={{ $json.text }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1040,
+        -1136
+      ],
+      "id": "3c4608d6-06a7-4da3-a8dd-3e2f7fb121a9",
+      "name": "Send a text message3",
+      "webhookId": "f964a2b9-2e77-4b4a-afcb-2edb8b73d469",
+      "credentials": {
+        "telegramApi": {
+          "id": "OmxEBwNk7Ffv0Vmc",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const textOriginal = $('Telegram Trigger').item.json.message.text.trim();\nconst text = textOriginal.toLowerCase();\n\nconst textSemAcento = text\n  .normalize(\"NFD\")\n  .replace(/[\\u0300-\\u036f]/g, \"\");\n\nlet action = \"ai\";\nlet statusFiltro = \"geral\";\n\nif (\n  textSemAcento.includes(\"minhas tarefas\") ||\n  textSemAcento === \"tarefas do gestor\" ||\n  textSemAcento === \"tarefa principal\"\n) {\n  action = \"listar_tarefas\";\n}\n\nif (\n  textSemAcento.includes(\"listar a fazer\") ||\n  textSemAcento.includes(\"ver a fazer\") ||\n  textSemAcento.includes(\"listar em andamento\") ||\n  textSemAcento.includes(\"ver em andamento\") ||\n  textSemAcento.includes(\"listar concluido\") ||\n  textSemAcento.includes(\"ver concluido\") ||\n  textSemAcento.includes(\"listar geral\") ||\n  textSemAcento.includes(\"meus passos\") ||\n  textSemAcento.includes(\"minhas etapas\")\n) {\n  action = \"listar_execucao\";\n\n  if (textSemAcento.includes(\"a fazer\")) {\n    statusFiltro = \"a_fazer\";\n  }\n\n  if (textSemAcento.includes(\"em andamento\")) {\n    statusFiltro = \"em_andamento\";\n  }\n\n  if (textSemAcento.includes(\"concluido\")) {\n    statusFiltro = \"concluido\";\n  }\n\n  if (\n    textSemAcento.includes(\"geral\") ||\n    textSemAcento.includes(\"meus passos\") ||\n    textSemAcento.includes(\"minhas etapas\")\n  ) {\n    statusFiltro = \"geral\";\n  }\n}\n\nif (\n  textSemAcento === \"criar_passo\" ||\n  textSemAcento === \"criar passo\" ||\n  textSemAcento === \"criar passos\" ||\n  (\n    textSemAcento.includes(\"titulo:\") &&\n    textSemAcento.includes(\"descricao:\")\n  )\n) {\n  action = \"criar_passos\";\n}\n\nif (\n  textSemAcento.startsWith(\"mover\") ||\n  textSemAcento.includes(\"para em andamento\") ||\n  textSemAcento.includes(\"para concluido\") ||\n  textSemAcento.includes(\"para a fazer\")\n) {\n  action = \"mover_card\";\n}\n\nreturn [{\n  json: {\n    ...$json,\n    action,\n    statusFiltro,\n    text: textOriginal\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2016,
+        -928
+      ],
+      "id": "5db9798d-fef3-4d56-bd10-673dda9b1c36",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const user = items[0].json;\nconst text = user.text || $('Telegram Trigger').item.json.message.text.trim();\n\nconst tituloMatch = text.match(/t[ií]tulo:\\s*([\\s\\S]*?)(?=descri[cç][aã]o:|$)/i);\nconst descricaoMatch = text.match(/descri[cç][aã]o:\\s*([\\s\\S]*)/i);\n\nif (!tituloMatch || !descricaoMatch) {\n  return [{\n    json: {\n      error: true,\n      text: \"❌ Use o formato:\\n\\nTítulo: Nome do passo\\nDescrição: Descrição detalhada do que deve ser feito\"\n    }\n  }];\n}\n\nconst titulo = tituloMatch[1].trim();\nconst descricao = descricaoMatch[1].trim();\n\nif (!titulo) {\n  return [{\n    json: {\n      error: true,\n      text: \"❌ O título do passo não pode ficar vazio.\"\n    }\n  }];\n}\n\nif (!descricao || descricao.length < 20) {\n  return [{\n    json: {\n      error: true,\n      text: \"❌ A descrição precisa ser mais detalhada. Explique melhor o que deve ser feito.\"\n    }\n  }];\n}\n\nreturn [{\n  json: {\n    error: false,\n    titulo,\n    descricao: `Responsável: ${user.trello_name}\\n\\nDescrição detalhada:\\n${descricao}`,\n    trello_member_id: user.trello_member_id,\n    trello_name: user.trello_name\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1424,
+        -992
+      ],
+      "id": "c52db0cf-4ec7-44b9-bfe3-c05a67e1b627",
+      "name": "Montar card do passo"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "00ade506-c883-4a7e-a51d-b2b944d1acaf",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -784,
+        -992
+      ],
+      "id": "7f08b4fb-8c09-46c8-919c-bb056321c9a3",
+      "name": "If4"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.trello.com/1/cards",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "trelloApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "idList",
+              "value": "6a062c534824aa141c9bda4f"
+            },
+            {
+              "name": "name",
+              "value": "={{ $json.titulo }}"
+            },
+            {
+              "name": "desc",
+              "value": "={{ $json.descricao }}"
+            },
+            {
+              "name": "idMembers",
+              "value": "={{ $json.trello_member_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -464,
+        -816
+      ],
+      "id": "85840e67-fcfc-4bb4-9609-3c540bcdfa28",
+      "name": "HTTP Request2",
+      "credentials": {
+        "trelloApi": {
+          "id": "18GZwq7JaoanBBJW",
+          "name": "Trello account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "=✅ Passo criado em A FAZER:\n\n{{ $('HTTP Request2').item.json.name }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -288,
+        -880
+      ],
+      "id": "42f94559-5117-41c9-8e3e-94754ef6eca6",
+      "name": "Send a text message6",
+      "webhookId": "f964a2b9-2e77-4b4a-afcb-2edb8b73d469",
+      "credentials": {
+        "telegramApi": {
+          "id": "OmxEBwNk7Ffv0Vmc",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "={{ $json.text }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -496,
+        -992
+      ],
+      "id": "0b9ebdc4-9770-4a17-9343-7e4f8d223e59",
+      "name": "Send a text message7",
+      "webhookId": "f964a2b9-2e77-4b4a-afcb-2edb8b73d469",
+      "credentials": {
+        "telegramApi": {
+          "id": "OmxEBwNk7Ffv0Vmc",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.trello.com/1/boards/I1BHSexd/cards",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "trelloApi",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -1424,
+        -832
+      ],
+      "id": "39db7e6a-ce56-468e-a47e-885ac098a629",
+      "name": "Buscar cards para mover",
+      "credentials": {
+        "trelloApi": {
+          "id": "18GZwq7JaoanBBJW",
+          "name": "Trello account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const user = $items(\"Code in JavaScript3\")[0].json;\n\nconst textOriginal = user.text || $('Telegram Trigger').item.json.message.text.trim();\nconst text = textOriginal.toLowerCase();\n\nconst LISTAS = {\n  A_FAZER: \"6a062c534824aa141c9bda4f\",\n  EM_ANDAMENTO: \"6a062c534824aa141c9bda50\",\n  CONCLUIDO: \"6a062c534824aa141c9bda51\"\n};\n\nconst NOMES_LISTAS = {\n  A_FAZER: \"A FAZER\",\n  EM_ANDAMENTO: \"EM ANDAMENTO\",\n  CONCLUIDO: \"CONCLUÍDO\"\n};\n\nlet destino = null;\n\nif (text.includes(\"para em andamento\")) {\n  destino = \"EM_ANDAMENTO\";\n}\n\nif (text.includes(\"para concluido\") || text.includes(\"para concluído\")) {\n  destino = \"CONCLUIDO\";\n}\n\nif (text.includes(\"para a fazer\")) {\n  destino = \"A_FAZER\";\n}\n\nif (!destino) {\n  return [{\n    json: {\n      error: true,\n      text: \"❌ Informe o destino correto: a fazer, em andamento ou concluído.\\n\\nExemplo:\\nmover Tela do carrinho para em andamento\"\n    }\n  }];\n}\n\nconst nomeCard = textOriginal\n  .replace(/^mover\\s+/i, \"\")\n  .replace(/\\s+para\\s+em andamento/i, \"\")\n  .replace(/\\s+para\\s+concluido/i, \"\")\n  .replace(/\\s+para\\s+concluído/i, \"\")\n  .replace(/\\s+para\\s+a fazer/i, \"\")\n  .trim();\n\nif (!nomeCard) {\n  return [{\n    json: {\n      error: true,\n      text: \"❌ Informe o nome do card.\\n\\nExemplo:\\nmover Tela do carrinho para em andamento\"\n    }\n  }];\n}\n\nconst listasPermitidas = Object.values(LISTAS);\n\nconst cardsDoUsuario = items\n  .map(item => item.json)\n  .filter(card => {\n    return Array.isArray(card.idMembers)\n      && card.idMembers.includes(user.trello_member_id)\n      && listasPermitidas.includes(card.idList);\n  });\n\nconst card = cardsDoUsuario.find(c =>\n  c.name.toLowerCase().includes(nomeCard.toLowerCase())\n);\n\nif (!card) {\n  const disponiveis = cardsDoUsuario.length\n    ? cardsDoUsuario.map(c => `- ${c.name}`).join(\"\\n\")\n    : \"Nenhum card encontrado em A FAZER, EM ANDAMENTO ou CONCLUÍDO.\";\n\n  return [{\n    json: {\n      error: true,\n      text: `❌ Não encontrei esse card nas suas tarefas.\\n\\nCards disponíveis:\\n${disponiveis}`\n    }\n  }];\n}\n\nreturn [{\n  json: {\n    error: false,\n    card_id: card.id,\n    card_name: card.name,\n    idList: LISTAS[destino],\n    destino_label: NOMES_LISTAS[destino]\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1248,
+        -832
+      ],
+      "id": "37df252c-c216-41d9-b314-5c9d5ae32416",
+      "name": "Encontrar card e destino"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "00ade506-c883-4a7e-a51d-b2b944d1acaf",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1088,
+        -832
+      ],
+      "id": "db52b894-9de7-4301-8bc7-8005e4d51a48",
+      "name": "If5"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "={{ $json.text }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -864,
+        -864
+      ],
+      "id": "21451dfe-12c7-4096-965b-418bf65caaf5",
+      "name": "Send a text message8",
+      "webhookId": "f964a2b9-2e77-4b4a-afcb-2edb8b73d469",
+      "credentials": {
+        "telegramApi": {
+          "id": "OmxEBwNk7Ffv0Vmc",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://api.trello.com/1/cards/{{ $json.card_id }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "trelloApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "idList",
+              "value": "={{ $json.idList }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -928,
+        -688
+      ],
+      "id": "372af1f1-be74-44a6-9690-505138c1b38b",
+      "name": "HTTP Request3",
+      "credentials": {
+        "trelloApi": {
+          "id": "18GZwq7JaoanBBJW",
+          "name": "Trello account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "=✅ Card movido com sucesso:\n\n{{ $('Encontrar card e destino').item.json.card_name }} → {{ $('Encontrar card e destino').item.json.destino_label }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -736,
+        -720
+      ],
+      "id": "e7ffdedd-9483-4611-a11e-e3491e49ae92",
+      "name": "Send a text message9",
+      "webhookId": "f964a2b9-2e77-4b4a-afcb-2edb8b73d469",
+      "credentials": {
+        "telegramApi": {
+          "id": "OmxEBwNk7Ffv0Vmc",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.trello.com/1/boards/I1BHSexd/cards",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "trelloApi",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -1136,
+        -576
+      ],
+      "id": "31231f40-d18e-4f61-8244-a82c6fa40ac6",
+      "name": "Buscar cards execução",
+      "credentials": {
+        "trelloApi": {
+          "id": "18GZwq7JaoanBBJW",
+          "name": "Trello account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const user = $items(\"Code in JavaScript3\")[0].json;\n\nconst trelloMemberId = user.trello_member_id;\nconst trelloName = user.trello_name;\nconst statusFiltro = user.statusFiltro || \"geral\";\n\nconst LISTAS = {\n  a_fazer: \"6a062c534824aa141c9bda4f\",\n  em_andamento: \"6a062c534824aa141c9bda50\",\n  concluido: \"6a062c534824aa141c9bda51\"\n};\n\nconst NOMES = {\n  a_fazer: \"A FAZER\",\n  em_andamento: \"EM ANDAMENTO\",\n  concluido: \"CONCLUÍDO\"\n};\n\nconst cardsDoUsuario = items\n  .map(item => item.json)\n  .filter(card => {\n    return Array.isArray(card.idMembers)\n      && card.idMembers.includes(trelloMemberId)\n      && Object.values(LISTAS).includes(card.idList);\n  });\n\nfunction formatarCards(cards) {\n  if (cards.length === 0) return \"Nenhum card encontrado.\";\n\n  return cards.map((card, index) => {\n    const prazo = card.due\n      ? new Date(card.due).toLocaleDateString(\"pt-BR\")\n      : \"sem prazo\";\n\n    return `${index + 1}. ${card.name}\\nPrazo: ${prazo}`;\n  }).join(\"\\n\\n\");\n}\n\nif (statusFiltro !== \"geral\") {\n  const cardsFiltrados = cardsDoUsuario.filter(card => card.idList === LISTAS[statusFiltro]);\n\n  return [{\n    json: {\n      text: `📋 ${NOMES[statusFiltro]} - ${trelloName}:\\n\\n${formatarCards(cardsFiltrados)}`\n    }\n  }];\n}\n\nconst cardsAFazer = cardsDoUsuario.filter(card => card.idList === LISTAS.a_fazer);\nconst cardsAndamento = cardsDoUsuario.filter(card => card.idList === LISTAS.em_andamento);\nconst cardsConcluido = cardsDoUsuario.filter(card => card.idList === LISTAS.concluido);\n\nreturn [{\n  json: {\n    text:\n`📋 Resumo dos seus passos - ${trelloName}\n\n🟡 A FAZER:\n${formatarCards(cardsAFazer)}\n\n🔵 EM ANDAMENTO:\n${formatarCards(cardsAndamento)}\n\n✅ CONCLUÍDO:\n${formatarCards(cardsConcluido)}`\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -960,
+        -512
+      ],
+      "id": "e0e5e365-1749-4e3f-adde-8ca3febfb5bf",
+      "name": "Listar cards execução"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "={{ $json.text }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -816,
+        -368
+      ],
+      "id": "4fb5dd67-9f51-4ab6-b38e-de1a77e2c395",
+      "name": "Send a text message10",
+      "webhookId": "f964a2b9-2e77-4b4a-afcb-2edb8b73d469",
+      "credentials": {
+        "telegramApi": {
+          "id": "OmxEBwNk7Ffv0Vmc",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO bot_interactions (\n  telegram_id,\n  telegram_name,\n  trello_name,\n  trello_member_id,\n  direction,\n  action,\n  user_message,\n  raw_payload\n)\nVALUES (\n  $1, $2, $3, $4, $5, $6, $7, $8::jsonb\n);",
+        "options": {
+          "queryReplacement": "={{ [   String($('Telegram Trigger').item.json.message.from.id),   (($('Telegram Trigger').item.json.message.from.first_name || '') + ' ' + ($('Telegram Trigger').item.json.message.from.last_name || '')).trim(),   $json.trello_name || null,   $json.trello_member_id || null,   'user',   $json.action || 'mensagem',   $('Telegram Trigger').item.json.message.text || '',   JSON.stringify($('Telegram Trigger').item.json) ] }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -1888,
+        -720
+      ],
+      "id": "d6b9b436-1bba-4913-8cac-653b638767fe",
+      "name": "Log mensagem usuário",
+      "credentials": {
+        "postgres": {
+          "id": "azeM6ISTCojJ7Jsd",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO bot_interactions (\n  telegram_id,\n  telegram_name,\n  direction,\n  action,\n  user_message,\n  bot_response,\n  raw_payload\n)\nVALUES (\n  $1, $2, $3, $4, $5, $6, $7::jsonb\n);",
+        "options": {
+          "queryReplacement": "={{ [\n  String($('Telegram Trigger').item.json.message.from.id),\n  (($('Telegram Trigger').item.json.message.from.first_name || '') + ' ' + ($('Telegram Trigger').item.json.message.from.last_name || '')).trim(),\n  'ai',\n  'ai_response',\n  $('Telegram Trigger').item.json.message.text || '',\n  $json.output || '',\n  JSON.stringify($json)\n] }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -1440,
+        -448
+      ],
+      "id": "c7835c2a-3558-4b76-ac0e-7de01826bded",
+      "name": "Log resposta IA",
+      "credentials": {
+        "postgres": {
+          "id": "azeM6ISTCojJ7Jsd",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO bot_interactions (\n  telegram_id,\n  telegram_name,\n  trello_name,\n  trello_member_id,\n  direction,\n  action,\n  user_message,\n  bot_response,\n  trello_card_id,\n  trello_card_name,\n  trello_list_to,\n  raw_payload\n)\nVALUES (\n  $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12::jsonb\n);",
+        "options": {
+          "queryReplacement": "={{ [\n  String($('Telegram Trigger').item.json.message.from.id),\n  (($('Telegram Trigger').item.json.message.from.first_name || '') + ' ' + ($('Telegram Trigger').item.json.message.from.last_name || '')).trim(),\n  $('Code in JavaScript3').item.json.trello_name || null,\n  $('Code in JavaScript3').item.json.trello_member_id || null,\n  'trello',\n  'criar_passo',\n  $('Telegram Trigger').item.json.message.text || '',\n  'Passo criado em A FAZER',\n  $json.id || null,\n  $json.name || null,\n  'A FAZER',\n  JSON.stringify($json)\n] }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -288,
+        -704
+      ],
+      "id": "3385d331-2465-4726-9869-c902e0e939fc",
+      "name": "Log criação card",
+      "credentials": {
+        "postgres": {
+          "id": "azeM6ISTCojJ7Jsd",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO bot_interactions (\n  telegram_id,\n  telegram_name,\n  trello_name,\n  trello_member_id,\n  direction,\n  action,\n  user_message,\n  bot_response,\n  trello_card_id,\n  trello_card_name,\n  trello_list_to,\n  raw_payload\n)\nVALUES (\n  $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12::jsonb\n);",
+        "options": {
+          "queryReplacement": "={{ [\n  String($('Telegram Trigger').item.json.message.from.id),\n  (($('Telegram Trigger').item.json.message.from.first_name || '') + ' ' + ($('Telegram Trigger').item.json.message.from.last_name || '')).trim(),\n  $('Code in JavaScript3').item.json.trello_name || null,\n  $('Code in JavaScript3').item.json.trello_member_id || null,\n  'trello',\n  'mover_card',\n  $('Telegram Trigger').item.json.message.text || '',\n  'Card movido com sucesso',\n  $('Encontrar card e destino').item.json.card_id || null,\n  $('Encontrar card e destino').item.json.card_name || null,\n  $('Encontrar card e destino').item.json.destino_label || null,\n  JSON.stringify($json)\n] }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -720,
+        -576
+      ],
+      "id": "5973f77a-6899-4b09-8526-5329fa795cda",
+      "name": "Log mover card",
+      "credentials": {
+        "postgres": {
+          "id": "azeM6ISTCojJ7Jsd",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Log resposta IA",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message1": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Send a text message5",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message4": {
+      "main": [
+        []
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Montar card do passo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Buscar cards para mover",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Buscar cards execução",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Send a text message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "Log mensagem usuário",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar card do passo": {
+      "main": [
+        [
+          {
+            "node": "If4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "Send a text message7",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "Log criação card",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a text message6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar cards para mover": {
+      "main": [
+        [
+          {
+            "node": "Encontrar card e destino",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Encontrar card e destino": {
+      "main": [
+        [
+          {
+            "node": "If5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If5": {
+      "main": [
+        [
+          {
+            "node": "Send a text message8",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "Log mover card",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a text message9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar cards execução": {
+      "main": [
+        [
+          {
+            "node": "Listar cards execução",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Listar cards execução": {
+      "main": [
+        [
+          {
+            "node": "Send a text message10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log mensagem usuário": {
+      "main": [
+        []
+      ]
+    },
+    "Log resposta IA": {
+      "main": [
+        []
+      ]
+    },
+    "Log criação card": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "e2b2dd9e-6c53-4a6b-a2da-b88b143dbb09",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "31f0bff0abcd3850ec6b9441ed88469bb4b8f3568b2853f0d135f6ebb9932e49"
+  },
+  "id": "GZGrp53wI4RR4bk9",
+  "tags": []
+}
