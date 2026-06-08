@@ -1,0 +1,1308 @@
+[
+  {
+    "id": 1,
+    "action": "listar_tarefas",
+    "direction": "user",
+    "created_at": "2026-06-04T17:31:16.186576",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 5174707464,
+          "type": "private",
+          "last_name": "Matias",
+          "first_name": "Guilherme"
+        },
+        "date": 1780594275,
+        "from": {
+          "id": 5174707464,
+          "is_bot": false,
+          "last_name": "Matias",
+          "first_name": "Guilherme",
+          "language_code": "pt-br"
+        },
+        "text": "Minhas tarefas",
+        "message_id": 55
+      },
+      "update_id": 33927192
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": null,
+    "user_message": "Minhas tarefas",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 2,
+    "action": "criar_passos",
+    "direction": "user",
+    "created_at": "2026-06-04T17:33:38.426149",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 5174707464,
+          "type": "private",
+          "last_name": "Matias",
+          "first_name": "Guilherme"
+        },
+        "date": 1780594414,
+        "from": {
+          "id": 5174707464,
+          "is_bot": false,
+          "last_name": "Matias",
+          "first_name": "Guilherme",
+          "language_code": "pt-br"
+        },
+        "text": "Titulo: Teste de log \\nDescricao: Testando o log",
+        "message_id": 58
+      },
+      "update_id": 33927194
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": null,
+    "user_message": "Titulo: Teste de log \\nDescricao: Testando o log",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 3,
+    "action": "criar_passo",
+    "direction": "trello",
+    "created_at": "2026-06-04T17:34:37.448522",
+    "raw_payload": {
+      "id": "6a21b72cc4e7439878dcdefd",
+      "due": null,
+      "pos": 140737488683008,
+      "url": "https://trello.com/c/x7XiNTxu/29-teste-de-log",
+      "desc": "Responsável: spiify\\n\\nDescrição detalhada:\\nCriando um card para validar se o log de criançao está funcionando corretamente",
+      "name": "Teste de log",
+      "agent": null,
+      "cover": {
+        "size": "normal",
+        "color": null,
+        "idPlugin": null,
+        "yPosition": 0.5,
+        "brightness": "dark",
+        "idAttachment": null,
+        "idUploadedBackground": null
+      },
+      "email": null,
+      "start": null,
+      "badges": {
+        "due": null,
+        "start": null,
+        "votes": 0,
+        "fogbugz": "",
+        "comments": 0,
+        "location": false,
+        "checkItems": 0,
+        "subscribed": false,
+        "attachments": 0,
+        "description": true,
+        "dueComplete": false,
+        "externalSource": null,
+        "lastUpdatedByAi": false,
+        "attachmentsByType": {
+          "trello": {
+            "card": 0,
+            "board": 0
+          }
+        },
+        "checkItemsChecked": 0,
+        "viewingMemberVoted": false,
+        "maliciousAttachments": 0,
+        "checkItemsEarliestDue": null
+      },
+      "closed": false,
+      "idList": "6a062c534824aa141c9bda4f",
+      "labels": [],
+      "limits": {},
+      "nodeId": "ari:cloud:trello::card/workspace/6a062c2bf884a57950e97493/6a21b72cc4e7439878dcdefd",
+      "pinned": false,
+      "idBoard": "6a062c534824aa141c9bda36",
+      "idShort": 29,
+      "cardRole": null,
+      "descData": {
+        "emoji": {}
+      },
+      "idLabels": [],
+      "shortUrl": "https://trello.com/c/x7XiNTxu",
+      "stickers": [],
+      "idMembers": [
+        "6a062cc5a2a4bab17431abfa"
+      ],
+      "shortLink": "x7XiNTxu",
+      "isTemplate": false,
+      "subscribed": false,
+      "attachments": [],
+      "dueComplete": false,
+      "dueReminder": null,
+      "idChecklists": [],
+      "idMembersVoted": [],
+      "mirrorSourceId": null,
+      "checkItemStates": [],
+      "dateLastActivity": "2026-06-04T17:34:36.870Z",
+      "idAttachmentCover": null,
+      "manualCoverAttachment": false
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": "Passo criado em A FAZER",
+    "user_message": "Titulo: Teste de log \\nDescricao: Criando um card para validar se o log de criançao está funcionando corretamente",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": "6a21b72cc4e7439878dcdefd",
+    "trello_list_to": "A FAZER",
+    "trello_card_name": "Teste de log",
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 4,
+    "action": "criar_passos",
+    "direction": "user",
+    "created_at": "2026-06-04T17:34:37.452189",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 5174707464,
+          "type": "private",
+          "last_name": "Matias",
+          "first_name": "Guilherme"
+        },
+        "date": 1780594474,
+        "from": {
+          "id": 5174707464,
+          "is_bot": false,
+          "last_name": "Matias",
+          "first_name": "Guilherme",
+          "language_code": "pt-br"
+        },
+        "text": "Titulo: Teste de log \\nDescricao: Criando um card para validar se o log de criançao está funcionando corretamente",
+        "message_id": 60
+      },
+      "update_id": 33927195
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": null,
+    "user_message": "Titulo: Teste de log \\nDescricao: Criando um card para validar se o log de criançao está funcionando corretamente",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 5,
+    "action": "mover_card",
+    "direction": "trello",
+    "created_at": "2026-06-04T17:34:58.571742",
+    "raw_payload": {
+      "id": "6a21b72cc4e7439878dcdefd",
+      "due": null,
+      "pos": 140737488683008,
+      "url": "https://trello.com/c/x7XiNTxu/29-teste-de-log",
+      "desc": "Responsável: spiify\\n\\nDescrição detalhada:\\nCriando um card para validar se o log de criançao está funcionando corretamente",
+      "name": "Teste de log",
+      "agent": null,
+      "cover": {
+        "size": "normal",
+        "color": null,
+        "idPlugin": null,
+        "yPosition": 0.5,
+        "brightness": "dark",
+        "idAttachment": null,
+        "idUploadedBackground": null
+      },
+      "email": null,
+      "start": null,
+      "badges": {
+        "due": null,
+        "start": null,
+        "votes": 0,
+        "fogbugz": "",
+        "comments": 0,
+        "location": false,
+        "checkItems": 0,
+        "subscribed": false,
+        "attachments": 0,
+        "description": true,
+        "dueComplete": false,
+        "externalSource": null,
+        "lastUpdatedByAi": false,
+        "attachmentsByType": {
+          "trello": {
+            "card": 0,
+            "board": 0
+          }
+        },
+        "checkItemsChecked": 0,
+        "viewingMemberVoted": false,
+        "maliciousAttachments": 0,
+        "checkItemsEarliestDue": null
+      },
+      "closed": false,
+      "idList": "6a062c534824aa141c9bda50",
+      "labels": [],
+      "nodeId": "ari:cloud:trello::card/workspace/6a062c2bf884a57950e97493/6a21b72cc4e7439878dcdefd",
+      "pinned": false,
+      "idBoard": "6a062c534824aa141c9bda36",
+      "idShort": 29,
+      "cardRole": null,
+      "descData": {
+        "emoji": {}
+      },
+      "idLabels": [],
+      "shortUrl": "https://trello.com/c/x7XiNTxu",
+      "idMembers": [
+        "6a062cc5a2a4bab17431abfa"
+      ],
+      "shortLink": "x7XiNTxu",
+      "isTemplate": false,
+      "subscribed": false,
+      "dueComplete": false,
+      "dueReminder": null,
+      "idChecklists": [],
+      "idMembersVoted": [],
+      "mirrorSourceId": null,
+      "checkItemStates": [],
+      "dateLastActivity": "2026-06-04T17:34:57.985Z",
+      "idAttachmentCover": null,
+      "manualCoverAttachment": false
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": "Card movido com sucesso",
+    "user_message": "mover Teste de log para em andamento",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": "6a21b72cc4e7439878dcdefd",
+    "trello_list_to": "EM ANDAMENTO",
+    "trello_card_name": "Teste de log",
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 6,
+    "action": "mover_card",
+    "direction": "user",
+    "created_at": "2026-06-04T17:34:58.580303",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 5174707464,
+          "type": "private",
+          "last_name": "Matias",
+          "first_name": "Guilherme"
+        },
+        "date": 1780594495,
+        "from": {
+          "id": 5174707464,
+          "is_bot": false,
+          "last_name": "Matias",
+          "first_name": "Guilherme",
+          "language_code": "pt-br"
+        },
+        "text": "mover Teste de log para em andamento",
+        "message_id": 62
+      },
+      "update_id": 33927196
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": null,
+    "user_message": "mover Teste de log para em andamento",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 7,
+    "action": "criar_passo",
+    "direction": "trello",
+    "created_at": "2026-06-04T17:38:17.44797",
+    "raw_payload": {
+      "id": "6a21b8088d0c08aae2fd3ebd",
+      "due": null,
+      "pos": 140737488683008,
+      "url": "https://trello.com/c/0AQswWLZ/30-teste-de-log",
+      "desc": "Responsável: spiify\\n\\nDescrição detalhada:\\nCriando um card para validar se o log está correto",
+      "name": "Teste de log",
+      "agent": null,
+      "cover": {
+        "size": "normal",
+        "color": null,
+        "idPlugin": null,
+        "yPosition": 0.5,
+        "brightness": "dark",
+        "idAttachment": null,
+        "idUploadedBackground": null
+      },
+      "email": null,
+      "start": null,
+      "badges": {
+        "due": null,
+        "start": null,
+        "votes": 0,
+        "fogbugz": "",
+        "comments": 0,
+        "location": false,
+        "checkItems": 0,
+        "subscribed": false,
+        "attachments": 0,
+        "description": true,
+        "dueComplete": false,
+        "externalSource": null,
+        "lastUpdatedByAi": false,
+        "attachmentsByType": {
+          "trello": {
+            "card": 0,
+            "board": 0
+          }
+        },
+        "checkItemsChecked": 0,
+        "viewingMemberVoted": false,
+        "maliciousAttachments": 0,
+        "checkItemsEarliestDue": null
+      },
+      "closed": false,
+      "idList": "6a062c534824aa141c9bda4f",
+      "labels": [],
+      "limits": {},
+      "nodeId": "ari:cloud:trello::card/workspace/6a062c2bf884a57950e97493/6a21b8088d0c08aae2fd3ebd",
+      "pinned": false,
+      "idBoard": "6a062c534824aa141c9bda36",
+      "idShort": 30,
+      "cardRole": null,
+      "descData": {
+        "emoji": {}
+      },
+      "idLabels": [],
+      "shortUrl": "https://trello.com/c/0AQswWLZ",
+      "stickers": [],
+      "idMembers": [
+        "6a062cc5a2a4bab17431abfa"
+      ],
+      "shortLink": "0AQswWLZ",
+      "isTemplate": false,
+      "subscribed": false,
+      "attachments": [],
+      "dueComplete": false,
+      "dueReminder": null,
+      "idChecklists": [],
+      "idMembersVoted": [],
+      "mirrorSourceId": null,
+      "checkItemStates": [],
+      "dateLastActivity": "2026-06-04T17:38:16.745Z",
+      "idAttachmentCover": null,
+      "manualCoverAttachment": false
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": "Passo criado em A FAZER",
+    "user_message": "Titulo: Teste de log\\nDescrição: Criando um card para validar se o log está correto",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": "6a21b8088d0c08aae2fd3ebd",
+    "trello_list_to": "A FAZER",
+    "trello_card_name": "Teste de log",
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 8,
+    "action": "criar_passos",
+    "direction": "user",
+    "created_at": "2026-06-04T17:38:17.456252",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 5174707464,
+          "type": "private",
+          "last_name": "Matias",
+          "first_name": "Guilherme"
+        },
+        "date": 1780594696,
+        "from": {
+          "id": 5174707464,
+          "is_bot": false,
+          "last_name": "Matias",
+          "first_name": "Guilherme",
+          "language_code": "pt-br"
+        },
+        "text": "Titulo: Teste de log\\nDescrição: Criando um card para validar se o log está correto",
+        "message_id": 64
+      },
+      "update_id": 33927197
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": null,
+    "user_message": "Titulo: Teste de log\\nDescrição: Criando um card para validar se o log está correto",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 9,
+    "action": "criar_passo",
+    "direction": "trello",
+    "created_at": "2026-06-04T17:38:19.853777",
+    "raw_payload": {
+      "id": "6a21b80b61b307e8c9232a56",
+      "due": null,
+      "pos": 140737488699392,
+      "url": "https://trello.com/c/9G4yi9KD/31-teste-de-log",
+      "desc": "Responsável: spiify\\n\\nDescrição detalhada:\\nCriando um card para validar se o log está correto",
+      "name": "Teste de log",
+      "agent": null,
+      "cover": {
+        "size": "normal",
+        "color": null,
+        "idPlugin": null,
+        "yPosition": 0.5,
+        "brightness": "dark",
+        "idAttachment": null,
+        "idUploadedBackground": null
+      },
+      "email": null,
+      "start": null,
+      "badges": {
+        "due": null,
+        "start": null,
+        "votes": 0,
+        "fogbugz": "",
+        "comments": 0,
+        "location": false,
+        "checkItems": 0,
+        "subscribed": false,
+        "attachments": 0,
+        "description": true,
+        "dueComplete": false,
+        "externalSource": null,
+        "lastUpdatedByAi": false,
+        "attachmentsByType": {
+          "trello": {
+            "card": 0,
+            "board": 0
+          }
+        },
+        "checkItemsChecked": 0,
+        "viewingMemberVoted": false,
+        "maliciousAttachments": 0,
+        "checkItemsEarliestDue": null
+      },
+      "closed": false,
+      "idList": "6a062c534824aa141c9bda4f",
+      "labels": [],
+      "limits": {},
+      "nodeId": "ari:cloud:trello::card/workspace/6a062c2bf884a57950e97493/6a21b80b61b307e8c9232a56",
+      "pinned": false,
+      "idBoard": "6a062c534824aa141c9bda36",
+      "idShort": 31,
+      "cardRole": null,
+      "descData": {
+        "emoji": {}
+      },
+      "idLabels": [],
+      "shortUrl": "https://trello.com/c/9G4yi9KD",
+      "stickers": [],
+      "idMembers": [
+        "6a062cc5a2a4bab17431abfa"
+      ],
+      "shortLink": "9G4yi9KD",
+      "isTemplate": false,
+      "subscribed": false,
+      "attachments": [],
+      "dueComplete": false,
+      "dueReminder": null,
+      "idChecklists": [],
+      "idMembersVoted": [],
+      "mirrorSourceId": null,
+      "checkItemStates": [],
+      "dateLastActivity": "2026-06-04T17:38:19.281Z",
+      "idAttachmentCover": null,
+      "manualCoverAttachment": false
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": "Passo criado em A FAZER",
+    "user_message": "Titulo: Teste de log\\nDescrição: Criando um card para validar se o log está correto",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": "6a21b80b61b307e8c9232a56",
+    "trello_list_to": "A FAZER",
+    "trello_card_name": "Teste de log",
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 10,
+    "action": "criar_passos",
+    "direction": "user",
+    "created_at": "2026-06-04T17:38:19.857612",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 5174707464,
+          "type": "private",
+          "last_name": "Matias",
+          "first_name": "Guilherme"
+        },
+        "date": 1780594696,
+        "from": {
+          "id": 5174707464,
+          "is_bot": false,
+          "last_name": "Matias",
+          "first_name": "Guilherme",
+          "language_code": "pt-br"
+        },
+        "text": "Titulo: Teste de log\\nDescrição: Criando um card para validar se o log está correto",
+        "message_id": 64
+      },
+      "update_id": 33927197
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": null,
+    "user_message": "Titulo: Teste de log\\nDescrição: Criando um card para validar se o log está correto",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 11,
+    "action": "ai_response",
+    "direction": "ai",
+    "created_at": "2026-06-04T19:07:04.65405",
+    "raw_payload": {
+      "output": "=título: Trancar a Faculdade  \\ndescrição: Quero sair da FEI o quanto antes"
+    },
+    "telegram_id": "8224545598",
+    "trello_name": null,
+    "bot_response": "=título: Trancar a Faculdade  \\ndescrição: Quero sair da FEI o quanto antes",
+    "user_message": "Título : trancar a faculdade\\nDescrição : quero sair da FEI o quanto antes",
+    "telegram_name": "Caio Arnoni",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": null
+  },
+  {
+    "id": 12,
+    "action": "ai",
+    "direction": "user",
+    "created_at": "2026-06-04T19:07:04.66616",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 8224545598,
+          "type": "private",
+          "last_name": "Arnoni",
+          "first_name": "Caio"
+        },
+        "date": 1780599979,
+        "from": {
+          "id": 8224545598,
+          "is_bot": false,
+          "last_name": "Arnoni",
+          "first_name": "Caio",
+          "language_code": "pt-br"
+        },
+        "text": "Título : trancar a faculdade\\nDescrição : quero sair da FEI o quanto antes",
+        "message_id": 77
+      },
+      "update_id": 33927203
+    },
+    "telegram_id": "8224545598",
+    "trello_name": "caioarnoni1",
+    "bot_response": null,
+    "user_message": "Título : trancar a faculdade\\nDescrição : quero sair da FEI o quanto antes",
+    "telegram_name": "Caio Arnoni",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6999c7cd43bdaac1dff8812e"
+  },
+  {
+    "id": 13,
+    "action": "criar_passo",
+    "direction": "trello",
+    "created_at": "2026-06-04T19:08:49.044468",
+    "raw_payload": {
+      "id": "6a21cd4079d02fcc954ba639",
+      "due": null,
+      "pos": 140737488715776,
+      "url": "https://trello.com/c/TEkfwyCQ/32-trancar-a-faculdade",
+      "desc": "Responsável: caioarnoni1\\n\\nDescrição detalhada:\\nquero sair da FEI o quanto antes",
+      "name": "trancar a faculdade",
+      "agent": null,
+      "cover": {
+        "size": "normal",
+        "color": null,
+        "idPlugin": null,
+        "yPosition": 0.5,
+        "brightness": "dark",
+        "idAttachment": null,
+        "idUploadedBackground": null
+      },
+      "email": null,
+      "start": null,
+      "badges": {
+        "due": null,
+        "start": null,
+        "votes": 0,
+        "fogbugz": "",
+        "comments": 0,
+        "location": false,
+        "checkItems": 0,
+        "subscribed": false,
+        "attachments": 0,
+        "description": true,
+        "dueComplete": false,
+        "externalSource": null,
+        "lastUpdatedByAi": false,
+        "attachmentsByType": {
+          "trello": {
+            "card": 0,
+            "board": 0
+          }
+        },
+        "checkItemsChecked": 0,
+        "viewingMemberVoted": false,
+        "maliciousAttachments": 0,
+        "checkItemsEarliestDue": null
+      },
+      "closed": false,
+      "idList": "6a062c534824aa141c9bda4f",
+      "labels": [],
+      "limits": {},
+      "nodeId": "ari:cloud:trello::card/workspace/6a062c2bf884a57950e97493/6a21cd4079d02fcc954ba639",
+      "pinned": false,
+      "idBoard": "6a062c534824aa141c9bda36",
+      "idShort": 32,
+      "cardRole": null,
+      "descData": {
+        "emoji": {}
+      },
+      "idLabels": [],
+      "shortUrl": "https://trello.com/c/TEkfwyCQ",
+      "stickers": [],
+      "idMembers": [
+        "6999c7cd43bdaac1dff8812e"
+      ],
+      "shortLink": "TEkfwyCQ",
+      "isTemplate": false,
+      "subscribed": false,
+      "attachments": [],
+      "dueComplete": false,
+      "dueReminder": null,
+      "idChecklists": [],
+      "idMembersVoted": [],
+      "mirrorSourceId": null,
+      "checkItemStates": [],
+      "dateLastActivity": "2026-06-04T19:08:48.223Z",
+      "idAttachmentCover": null,
+      "manualCoverAttachment": false
+    },
+    "telegram_id": "8224545598",
+    "trello_name": "caioarnoni1",
+    "bot_response": "Passo criado em A FAZER",
+    "user_message": "título: trancar a faculdade \\ndescrição: quero sair da FEI o quanto antes",
+    "telegram_name": "Caio Arnoni",
+    "trello_card_id": "6a21cd4079d02fcc954ba639",
+    "trello_list_to": "A FAZER",
+    "trello_card_name": "trancar a faculdade",
+    "trello_list_from": null,
+    "trello_member_id": "6999c7cd43bdaac1dff8812e"
+  },
+  {
+    "id": 14,
+    "action": "criar_passos",
+    "direction": "user",
+    "created_at": "2026-06-04T19:08:49.048359",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 8224545598,
+          "type": "private",
+          "last_name": "Arnoni",
+          "first_name": "Caio"
+        },
+        "date": 1780600127,
+        "from": {
+          "id": 8224545598,
+          "is_bot": false,
+          "last_name": "Arnoni",
+          "first_name": "Caio",
+          "language_code": "pt-br"
+        },
+        "text": "título: trancar a faculdade \\ndescrição: quero sair da FEI o quanto antes",
+        "message_id": 79
+      },
+      "update_id": 33927204
+    },
+    "telegram_id": "8224545598",
+    "trello_name": "caioarnoni1",
+    "bot_response": null,
+    "user_message": "título: trancar a faculdade \\ndescrição: quero sair da FEI o quanto antes",
+    "telegram_name": "Caio Arnoni",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6999c7cd43bdaac1dff8812e"
+  },
+  {
+    "id": 15,
+    "action": "listar_tarefas",
+    "direction": "user",
+    "created_at": "2026-06-04T19:09:03.776098",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 8224545598,
+          "type": "private",
+          "last_name": "Arnoni",
+          "first_name": "Caio"
+        },
+        "date": 1780600143,
+        "from": {
+          "id": 8224545598,
+          "is_bot": false,
+          "last_name": "Arnoni",
+          "first_name": "Caio",
+          "language_code": "pt-br"
+        },
+        "text": "Minhas tarefas",
+        "message_id": 81
+      },
+      "update_id": 33927205
+    },
+    "telegram_id": "8224545598",
+    "trello_name": "caioarnoni1",
+    "bot_response": null,
+    "user_message": "Minhas tarefas",
+    "telegram_name": "Caio Arnoni",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6999c7cd43bdaac1dff8812e"
+  },
+  {
+    "id": 16,
+    "action": "criar_passo",
+    "direction": "trello",
+    "created_at": "2026-06-04T19:10:04.564436",
+    "raw_payload": {
+      "id": "6a21cd8b96cefaf91a02c80f",
+      "due": null,
+      "pos": 140737488732160,
+      "url": "https://trello.com/c/CsEcPJCk/33-teste-de-pontua%C3%A7%C3%A3o",
+      "desc": "Responsável: spiify\\n\\nDescrição detalhada:\\nTestando as pontuações pra usar corretamente e não dar nenhum bug",
+      "name": "Teste de pontuação",
+      "agent": null,
+      "cover": {
+        "size": "normal",
+        "color": null,
+        "idPlugin": null,
+        "yPosition": 0.5,
+        "brightness": "dark",
+        "idAttachment": null,
+        "idUploadedBackground": null
+      },
+      "email": null,
+      "start": null,
+      "badges": {
+        "due": null,
+        "start": null,
+        "votes": 0,
+        "fogbugz": "",
+        "comments": 0,
+        "location": false,
+        "checkItems": 0,
+        "subscribed": false,
+        "attachments": 0,
+        "description": true,
+        "dueComplete": false,
+        "externalSource": null,
+        "lastUpdatedByAi": false,
+        "attachmentsByType": {
+          "trello": {
+            "card": 0,
+            "board": 0
+          }
+        },
+        "checkItemsChecked": 0,
+        "viewingMemberVoted": false,
+        "maliciousAttachments": 0,
+        "checkItemsEarliestDue": null
+      },
+      "closed": false,
+      "idList": "6a062c534824aa141c9bda4f",
+      "labels": [],
+      "limits": {},
+      "nodeId": "ari:cloud:trello::card/workspace/6a062c2bf884a57950e97493/6a21cd8b96cefaf91a02c80f",
+      "pinned": false,
+      "idBoard": "6a062c534824aa141c9bda36",
+      "idShort": 33,
+      "cardRole": null,
+      "descData": {
+        "emoji": {}
+      },
+      "idLabels": [],
+      "shortUrl": "https://trello.com/c/CsEcPJCk",
+      "stickers": [],
+      "idMembers": [
+        "6a062cc5a2a4bab17431abfa"
+      ],
+      "shortLink": "CsEcPJCk",
+      "isTemplate": false,
+      "subscribed": false,
+      "attachments": [],
+      "dueComplete": false,
+      "dueReminder": null,
+      "idChecklists": [],
+      "idMembersVoted": [],
+      "mirrorSourceId": null,
+      "checkItemStates": [],
+      "dateLastActivity": "2026-06-04T19:10:03.862Z",
+      "idAttachmentCover": null,
+      "manualCoverAttachment": false
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": "Passo criado em A FAZER",
+    "user_message": "Título: Teste de pontuação\\nDescrição: Testando as pontuações pra usar corretamente e não dar nenhum bug",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": "6a21cd8b96cefaf91a02c80f",
+    "trello_list_to": "A FAZER",
+    "trello_card_name": "Teste de pontuação",
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 17,
+    "action": "criar_passos",
+    "direction": "user",
+    "created_at": "2026-06-04T19:10:04.571083",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 5174707464,
+          "type": "private",
+          "last_name": "Matias",
+          "first_name": "Guilherme"
+        },
+        "date": 1780600203,
+        "from": {
+          "id": 5174707464,
+          "is_bot": false,
+          "last_name": "Matias",
+          "first_name": "Guilherme",
+          "language_code": "pt-br"
+        },
+        "text": "Título: Teste de pontuação\\nDescrição: Testando as pontuações pra usar corretamente e não dar nenhum bug",
+        "message_id": 84
+      },
+      "update_id": 33927207
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": null,
+    "user_message": "Título: Teste de pontuação\\nDescrição: Testando as pontuações pra usar corretamente e não dar nenhum bug",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 18,
+    "action": "ai_response",
+    "direction": "ai",
+    "created_at": "2026-06-04T19:10:05.378408",
+    "raw_payload": {
+      "output": "Um caminhão varia muito em comprimento, dependendo do modelo e carga. Não há uma medida padrão global para isso."
+    },
+    "telegram_id": "8224545598",
+    "trello_name": null,
+    "bot_response": "Um caminhão varia muito em comprimento, dependendo do modelo e carga. Não há uma medida padrão global para isso.",
+    "user_message": "Quantos quilômetros tem um caminhão?",
+    "telegram_name": "Caio Arnoni",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": null
+  },
+  {
+    "id": 19,
+    "action": "ai",
+    "direction": "user",
+    "created_at": "2026-06-04T19:10:05.382292",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 8224545598,
+          "type": "private",
+          "last_name": "Arnoni",
+          "first_name": "Caio"
+        },
+        "date": 1780600180,
+        "from": {
+          "id": 8224545598,
+          "is_bot": false,
+          "last_name": "Arnoni",
+          "first_name": "Caio",
+          "language_code": "pt-br"
+        },
+        "text": "Quantos quilômetros tem um caminhão?",
+        "message_id": 83
+      },
+      "update_id": 33927206
+    },
+    "telegram_id": "8224545598",
+    "trello_name": "caioarnoni1",
+    "bot_response": null,
+    "user_message": "Quantos quilômetros tem um caminhão?",
+    "telegram_name": "Caio Arnoni",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6999c7cd43bdaac1dff8812e"
+  },
+  {
+    "id": 20,
+    "action": "ai_response",
+    "direction": "ai",
+    "created_at": "2026-06-04T19:10:19.857126",
+    "raw_payload": {
+      "output": "Consultar o Trello para listar as tarefas."
+    },
+    "telegram_id": "5174707464",
+    "trello_name": null,
+    "bot_response": "Consultar o Trello para listar as tarefas.",
+    "user_message": "Listar",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": null
+  },
+  {
+    "id": 21,
+    "action": "ai",
+    "direction": "user",
+    "created_at": "2026-06-04T19:10:19.861644",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 5174707464,
+          "type": "private",
+          "last_name": "Matias",
+          "first_name": "Guilherme"
+        },
+        "date": 1780600210,
+        "from": {
+          "id": 5174707464,
+          "is_bot": false,
+          "last_name": "Matias",
+          "first_name": "Guilherme",
+          "language_code": "pt-br"
+        },
+        "text": "Listar",
+        "message_id": 87
+      },
+      "update_id": 33927208
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": null,
+    "user_message": "Listar",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 22,
+    "action": "listar_execucao",
+    "direction": "user",
+    "created_at": "2026-06-04T19:10:41.791568",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 5174707464,
+          "type": "private",
+          "last_name": "Matias",
+          "first_name": "Guilherme"
+        },
+        "date": 1780600241,
+        "from": {
+          "id": 5174707464,
+          "is_bot": false,
+          "last_name": "Matias",
+          "first_name": "Guilherme",
+          "language_code": "pt-br"
+        },
+        "text": "Listar geral",
+        "message_id": 89
+      },
+      "update_id": 33927209
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": null,
+    "user_message": "Listar geral",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 23,
+    "action": "listar_execucao",
+    "direction": "user",
+    "created_at": "2026-06-04T19:10:57.76347",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 8224545598,
+          "type": "private",
+          "last_name": "Arnoni",
+          "first_name": "Caio"
+        },
+        "date": 1780600256,
+        "from": {
+          "id": 8224545598,
+          "is_bot": false,
+          "last_name": "Arnoni",
+          "first_name": "Caio",
+          "language_code": "pt-br"
+        },
+        "text": "Listar geral",
+        "message_id": 91
+      },
+      "update_id": 33927210
+    },
+    "telegram_id": "8224545598",
+    "trello_name": "caioarnoni1",
+    "bot_response": null,
+    "user_message": "Listar geral",
+    "telegram_name": "Caio Arnoni",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6999c7cd43bdaac1dff8812e"
+  },
+  {
+    "id": 24,
+    "action": "mover_card",
+    "direction": "trello",
+    "created_at": "2026-06-04T19:11:23.11955",
+    "raw_payload": {
+      "id": "6a21cd8b96cefaf91a02c80f",
+      "due": null,
+      "pos": 140737488732160,
+      "url": "https://trello.com/c/CsEcPJCk/33-teste-de-pontua%C3%A7%C3%A3o",
+      "desc": "Responsável: spiify\\n\\nDescrição detalhada:\\nTestando as pontuações pra usar corretamente e não dar nenhum bug",
+      "name": "Teste de pontuação",
+      "agent": null,
+      "cover": {
+        "size": "normal",
+        "color": null,
+        "idPlugin": null,
+        "yPosition": 0.5,
+        "brightness": "dark",
+        "idAttachment": null,
+        "idUploadedBackground": null
+      },
+      "email": null,
+      "start": null,
+      "badges": {
+        "due": null,
+        "start": null,
+        "votes": 0,
+        "fogbugz": "",
+        "comments": 0,
+        "location": false,
+        "checkItems": 0,
+        "subscribed": false,
+        "attachments": 0,
+        "description": true,
+        "dueComplete": false,
+        "externalSource": null,
+        "lastUpdatedByAi": false,
+        "attachmentsByType": {
+          "trello": {
+            "card": 0,
+            "board": 0
+          }
+        },
+        "checkItemsChecked": 0,
+        "viewingMemberVoted": false,
+        "maliciousAttachments": 0,
+        "checkItemsEarliestDue": null
+      },
+      "closed": false,
+      "idList": "6a062c534824aa141c9bda51",
+      "labels": [],
+      "nodeId": "ari:cloud:trello::card/workspace/6a062c2bf884a57950e97493/6a21cd8b96cefaf91a02c80f",
+      "pinned": false,
+      "idBoard": "6a062c534824aa141c9bda36",
+      "idShort": 33,
+      "cardRole": null,
+      "descData": {
+        "emoji": {}
+      },
+      "idLabels": [],
+      "shortUrl": "https://trello.com/c/CsEcPJCk",
+      "idMembers": [
+        "6a062cc5a2a4bab17431abfa"
+      ],
+      "shortLink": "CsEcPJCk",
+      "isTemplate": false,
+      "subscribed": false,
+      "dueComplete": false,
+      "dueReminder": null,
+      "idChecklists": [],
+      "idMembersVoted": [],
+      "mirrorSourceId": null,
+      "checkItemStates": [],
+      "dateLastActivity": "2026-06-04T19:11:22.434Z",
+      "idAttachmentCover": null,
+      "manualCoverAttachment": false
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": "Card movido com sucesso",
+    "user_message": "Mover Teste de pontuação para Concluído",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": "6a21cd8b96cefaf91a02c80f",
+    "trello_list_to": "CONCLUÍDO",
+    "trello_card_name": "Teste de pontuação",
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 25,
+    "action": "mover_card",
+    "direction": "user",
+    "created_at": "2026-06-04T19:11:23.125777",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 5174707464,
+          "type": "private",
+          "last_name": "Matias",
+          "first_name": "Guilherme"
+        },
+        "date": 1780600281,
+        "from": {
+          "id": 5174707464,
+          "is_bot": false,
+          "last_name": "Matias",
+          "first_name": "Guilherme",
+          "language_code": "pt-br"
+        },
+        "text": "Mover Teste de pontuação para Concluído",
+        "message_id": 93
+      },
+      "update_id": 33927211
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": null,
+    "user_message": "Mover Teste de pontuação para Concluído",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  },
+  {
+    "id": 26,
+    "action": "ai_response",
+    "direction": "ai",
+    "created_at": "2026-06-05T17:57:45.879122",
+    "raw_payload": {
+      "output": "1512700"
+    },
+    "telegram_id": "5174707464",
+    "trello_name": null,
+    "bot_response": "1512700",
+    "user_message": "Quanto é 170*8910",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": null
+  },
+  {
+    "id": 27,
+    "action": "ai",
+    "direction": "user",
+    "created_at": "2026-06-05T17:57:45.886168",
+    "raw_payload": {
+      "message": {
+        "chat": {
+          "id": 5174707464,
+          "type": "private",
+          "last_name": "Matias",
+          "first_name": "Guilherme"
+        },
+        "date": 1780682212,
+        "from": {
+          "id": 5174707464,
+          "is_bot": false,
+          "last_name": "Matias",
+          "first_name": "Guilherme",
+          "language_code": "pt-br"
+        },
+        "text": "Quanto é 170*8910",
+        "message_id": 95
+      },
+      "update_id": 33927212
+    },
+    "telegram_id": "5174707464",
+    "trello_name": "spiify",
+    "bot_response": null,
+    "user_message": "Quanto é 170*8910",
+    "telegram_name": "Guilherme Matias",
+    "trello_card_id": null,
+    "trello_list_to": null,
+    "trello_card_name": null,
+    "trello_list_from": null,
+    "trello_member_id": "6a062cc5a2a4bab17431abfa"
+  }
+]
