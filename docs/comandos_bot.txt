@@ -1,0 +1,67 @@
+	GUIA DE COMANDOS - BOT TELEGRAM + TRELLO
+
+1) Cadastro inicial
+Use quando o bot perguntar: "Qual é seu nome no Trello?"
+
+Exemplos:
+joao151
+maria452
+spiify
+tainacunhabueno
+
+
+2) Ver tarefa principal atribuída pelo gestor
+Lista os cards da coluna TAREFAS que foram atribuídos ao seu usuário no Trello.
+
+Comando:
+minhas tarefas
+
+
+3) Criar um passo na coluna A FAZER
+Cria um novo card em A FAZER, atribuído automaticamente ao seu usuário.
+
+COMANDO:
+"criar passo" mostra o modelo abaixo 
+
+COMANDO:
+titulo: Nome do passo
+descricao: Descrição detalhada do que deve ser feito
+
+Exemplo:
+titulo: Adicionar botão de adicionar e remover itens
+descricao: O botão terá cor azul para adicionar ao carrinho e vermelho para remover do carrinho. Todos devem ficar bem centralizados nas imagens dos produtos.
+
+
+4) Listar seus passos por status
+Lista apenas os seus cards atribuídos nas colunas A FAZER, EM ANDAMENTO ou CONCLUÍDO.
+
+Comandos:
+listar a fazer
+listar em andamento
+listar concluído
+listar geral
+
+Sugestão:
+- "listar geral" mostra seus cards separados por A FAZER, EM ANDAMENTO e CONCLUÍDO.
+
+
+5) Mover um passo entre colunas
+Move somente cards atribuídos ao seu usuário.
+
+Formatos:
+mover Nome do card para a fazer
+mover Nome do card para em andamento
+mover Nome do card para concluído
+
+Exemplos:
+mover Adicionar botão de adicionar e remover itens para em andamento
+mover Adicionar botão de adicionar e remover itens para concluído
+
+
+6) Dúvidas gerais para IA
+Qualquer mensagem fora dos comandos acima vai para a IA.
+
+Exemplos:
+Como faço para colocar uma cor azul em JavaScript?
+Me explique como conectar no banco de dados
+Como criar uma tela de login?
